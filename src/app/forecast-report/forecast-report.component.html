@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div class="card">
+                    <div class="card-header ">
+                        <div class="back-btn">
+                            <button class="btn btn-primary" (click)="backtoHome()"><span
+                                    class="glyphicon glyphicon-arrow-left"> Back</span></button>
+                        </div>
+                        <h4 class="text-center"><b>Next 5-day forecast details</b></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="pb-3">
+                            <legend><b>{{weatherDetails?.city?.name}} <span *ngIf="weatherDetails">-
+                                        {{zip_Code}}</span></b></legend>
+                            <div class="mt-4">
+                                <ul class="list-group " *ngIf="weatherDetails && weatherDetails.list.length > 0">
+                                    <ng-container *ngFor="let item of weatherDetails.list; let i=index">
+                                        <li class="list-group-item" *ngIf="i !== 0 && i < 6">
+                                            {{item.updated_date | date: 'EEEE, MMM d'}}:
+                                            {{item.weather[0].main}}
+                                            - Min: {{(item.temp.min-273.15)| number : '1.0-0'}}℃
+                                            - Max: {{(item.temp.max-273.15)| number : '1.0-0'}}℃
+                                            <img class="icon" *ngIf="item.weather[0].main !=='Clear'"
+                                                src="https://www.angulartraining.com/images/weather/{{item.weather[0].main | lowercase}}.png">
+                                            <img class="icon" *ngIf="item.weather[0].main ==='Clear'"
+                                                src="https://www.angulartraining.com/images/weather/sun.png">
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

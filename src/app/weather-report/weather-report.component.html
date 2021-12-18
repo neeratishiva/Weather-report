@@ -1,0 +1,69 @@
+
+<div class="container main-div">
+    <div class="row main-border">
+        <div class='col-md-12'>
+            <div class="text-center">
+                <h3>Weather App</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="div1">
+                        <div class="text-center">
+                            <h4>Add a Location</h4>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-8">
+                            <label for="">Enter a Zipcode</label>
+                            <input type="text" class="form-control" name="" id="" maxlength="6" [(ngModel)]="zip_code"
+                                (keydown)="onKeydown($event)" placeholder="Enter Zip Code">
+                        </div>
+                        <div class="col-md-3 btn-mrgn">
+                            <button class='btn btn-primary' (click)="addZipCode()">Add location</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row div1">
+                        <h5 class="weather-hdn">Weather Report</h5>
+                        <div class="col-md-12 text-center" *ngIf="weather_DataList.length==0">No data found</div>
+                        <div class="" *ngFor="let item of weather_DataList; let i = index">
+                            <div class="div1 div2"> 
+                                <div class="row">
+                                    <div class="col-md-8">                                   
+                                        <h5>{{ item.name }} ({{ item.zipcode }})</h5>
+                                        <h6><small>Current Conditions: <span class="text-success">{{ item.weather[0].main
+                                                    }}</span></small></h6>
+                                        <h6><small>Temperatures today:</small></h6>
+                                        <p>
+                                            Current {{ item.main.temp - 273.15 | number: "1.0-0" }}℃ - Max
+                                            {{ item.main.temp_max - 273.15 | number: "1.0-0" }}℃ - Min
+                                            {{ item.main.temp_min - 273.15 | number: "1.0-0" }}℃
+                                        </p>
+                                        <a (click)="navigatetoDetail( item.zipcode)"><b>Show 5-day forecast for {{ item.name
+                                                }}</b></a>
+                                    </div>
+                                    <div class="col-md-4">       
+                                        <div>
+                                        <img class="weather-img"
+                                        *ngIf="item.weather[0].main != 'Clear' && item.weather[0].main != 'Haze'" src="https://www.angulartraining.com/images/weather/{{
+                                                    item.weather[0].main | lowercase
+                                                }}.png" />
+                                        <img class="weather-img" *ngIf="item.weather[0].main === 'Haze'"
+                                        src="https://www.angulartraining.com/images/weather/snow.png" />
+
+                                        <img class="weather-img" *ngIf="item.weather[0].main === 'Clear'"
+                                        src="https://www.angulartraining.com/images/weather/sun.png" />
+                                        <span class="close h4" (click)="delete(item.zipcode)" title="Remove">×</span>
+                                        </div>
+                                    </div>
+                                </div>                     
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
